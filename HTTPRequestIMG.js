@@ -1,12 +1,12 @@
 var request = require("request");
 var fs = require("fs");
 
-request.get('https://sytantris.github.io/http-examples/future.jpg', function (err, response, body) {
+request.get('https://sytantris.github.io/http-examples/future.jpg')
 
   .on('error', function (err) {
     console.log("Encountered Error code : " + err.statusCode);
   })
   .on('response', function (response) {
-    console.log((response.statusCode + response.statusMessage + response.headers['content-type']).join('\n')
+    console.log("Image info : StatCode: " + response.statusCode + ", StatMessage: " + response.statusMessage + ", ContentType: " + response.headers['content-type']);
   })
-})
+  .pipe(fs.createWriteStream('./future.jpg'));
